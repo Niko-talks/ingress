@@ -1,0 +1,22 @@
+# nginx-values.yaml (исправленная версия)
+controller:
+  service:
+    type: LoadBalancer
+    annotations:
+      cloud.google.com/load-balancer-type: "External"
+      cloud.google.com/network: "vlan50"
+      cloud.google.com/subnet: "vlan50"
+      nginx.ingress.kubernetes.io/http3: "true"
+    ports:
+      http: 80
+      https: 443
+      quic:
+        port: 443
+        protocol: UDP
+  config:
+    http3: "true"
+    ssl-protocols: "TLSv1.3"
+  resources:
+    requests:
+      cpu: 300m
+      memory: 512Mi

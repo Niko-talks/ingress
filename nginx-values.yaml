@@ -1,4 +1,5 @@
 # nginx-values.yaml (исправленная версия)
+nameOverride: "custom-nginx"
 controller:
   service:
     type: LoadBalancer

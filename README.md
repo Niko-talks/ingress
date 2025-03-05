@@ -1,3 +1,7 @@
+# Перед применением манифеста добавлялся репозиторий
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm update
+
 # Создается новый IngressClass чтобы не мешать работе старому контроллеру
 set {
   name  = "controller.ingressClass"

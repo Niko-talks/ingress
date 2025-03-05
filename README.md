@@ -34,6 +34,7 @@ kubectl exec -n ingress-nginx deploy/ingress-nginx-controller -- nginx -V 2>&1 |
 Должна быть строка: --with-http_v3_module
 
 nmap -sU -p 443 LoadBalancerIP
+
 Должно отобразиться:
 
 PORT    STATE         SERVICE

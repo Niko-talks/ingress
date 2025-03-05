@@ -52,14 +52,14 @@ data "google_compute_subnetwork" "vlan50_subnet" {
 }
 
 # Установка NGINX Ingress Controller с HTTP/3
-resource "helm_release" "ingress_nginx" {
+resource "helm_release" "custom_nginx" {
   name       = "ingress-nginx"
   repository = "https://kubernetes.github.io/ingress-nginx"
   chart      = "ingress-nginx"
   version    = "4.12.0"
   namespace  = "ingress-nginx"
   create_namespace = true
-  timeout    = 600
+  force_update = true
 
   values = [templatefile("${path.module}/nginx-values.yaml", {
     network_name = data.google_compute_network.vlan50.name
@@ -78,6 +78,10 @@ resource "helm_release" "ingress_nginx" {
   set {
     name  = "controller.image.tag"
     value = "v1.8.1"
+  }
+  set {
+    name  = "controller.ingressClassResource.name"
+    value = "nginx-new"  # Измените имя IngressClass
   }
 }
 
